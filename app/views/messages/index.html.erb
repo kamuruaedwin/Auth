@@ -1,0 +1,22 @@
+<!-- app/views/messages/index.html.erb -->
+<h1>Messages</h1>
+
+<%= render 'main/Message_form' %>
+
+<% if flash[:notice].present? %>
+  <div class="alert alert-success">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<% if flash[:alert].present? %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
+<ul>
+  <% @messages.each do |message| %>
+    <li><%= message.content %></li>
+  <% end %>
+</ul>

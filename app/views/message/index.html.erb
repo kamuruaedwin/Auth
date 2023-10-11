@@ -1,0 +1,14 @@
+# Message Form (app/views/messages/index.html.erb)
+<%= form_with(model: Message.new, url: messages_path, local: true) do |form| %>
+  <%= form.text_area :content, placeholder: 'Type your message here...' %>
+  <%= form.submit 'Post Message' %>
+<% end %>
+
+# Display Messages (app/views/messages/index.html.erb)
+<% @messages.each do |message| %>
+  <div>
+    <strong><%= message.user.username %>:</strong>
+    <%= message.content %>
+    <span class="timestamp"><%= message.created_at.strftime('%Y-%m-%d %H:%M:%S') %></span>
+  </div>
+<% end %>

@@ -1,0 +1,84 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PesaFast</title>
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag 'styles' %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    
+    
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Include Chart.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+    <!-- Include CryptoJS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.3.0/crypto-js.js"></script>
+    
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    
+  </head>
+
+  <body>      
+   <p>Users Online: <%= @online_users_count %></p>
+  <% if flash[:notice].present? %>
+    <div class="alert alert-success">
+      <%= flash[:notice] %>
+    </div>
+  <% end %>
+
+  <% if flash[:alert].present? %>
+    <div class="alert alert-danger">
+      <%= flash[:alert] %>
+    </div>
+  <% end %>
+
+
+    <div class="container-fluid">
+     
+      <%= render 'home/header'%>
+   
+      <%= turbo_frame_tag "modal" %>
+      <%= yield %>
+
+    <div id=container>
+    
+      
+      <footer>
+        <p> 
+        <a href="#">PesaFast BLCB no 88888 Copyright © 2023 All Rights Reserved</a></p>
+      </footer>
+  
+  </div>
+</div>
+  
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+<!-- JavaScript to hide flash messages after 3 seconds -->
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    // Select all flash message elements
+    var flashMessages = document.querySelectorAll('.alert');
+
+    // Loop through flash messages and hide them after 3 seconds
+    flashMessages.forEach(function(flashMessage) {
+      setTimeout(function() {
+        flashMessage.style.display = 'none';
+      }, 3000); // 3000 milliseconds (3 seconds)
+    });
+  });
+</script>
+
+  </body>
+ 
+</html>

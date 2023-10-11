@@ -1,0 +1,22 @@
+<div id="chat-container">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                <p class="card-title">Chats</p>
+            </div>
+            <div class="card-body">          
+    
+                <ul>
+                  <% @messages.each do |message| %>
+                    <li> <%=message.content %>
+                        
+                    </li>
+                  <% end %>
+                </ul>
+                <% if user_signed_in? %>
+                <%= render 'main/Message_form' %>
+                <%end%>
+
+            </div>
+        </div>
+    </div>
+    </div>

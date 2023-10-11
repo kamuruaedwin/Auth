@@ -1,0 +1,43 @@
+<!-- app/views/bets/new.html.erb -->
+<%if user_signed_in?%>
+<div id ="container">
+  <div class="card" style="width: 17rem;" >
+    <div class="card-header">
+      <h5 >Place Bet</h5>
+    </div>
+    <div class="card-body">
+          <%= form_with(model: @bet, url: bets_path, method: "post") do |form| %>
+
+          <% if form.object.errors.any? %>
+            <!-- <div id="error_explanation"> -->
+              
+                <% form.object.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              
+            
+          <% end %>
+          <!-- hidden authenticity token -->
+          <% form_authenticity_token %>
+
+              <div class="form-group">
+                <label for="stake_amount">Amount To Bet</label>
+                <input type="number" class="form-control" name="bet[stake_amount]" id="stake_amount" placeholder="Enter stake amount">
+              </div>
+
+              <div class="form-group">
+                <label for="predicted_y_value">Your Prediction</label>
+                <input type="number" class="form-control" name="bet[predicted_y_value]" id="predicted_y_value" placeholder="Enter your prediction"> 
+              </div>
+<!-- linkinhg a bet to user -->
+           
+            
+          
+
+          <div class="actions">
+            <%= form.submit "Place Bet" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+   <% end %>

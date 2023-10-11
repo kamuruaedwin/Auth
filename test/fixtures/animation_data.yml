@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  hashvalue: MyString
+  burst_value: 1.5
+
+two:
+  hashvalue: MyString
+  burst_value: 1.5

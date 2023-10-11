@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#"><strong>PesaFast</strong><br>Play Win Play</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation" color="blue">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <% if user_signed_in? %>
+        <li class="nav-item">
+          <a class="nav-link flex-grow-1" href="<%= deposits_new_path %>" data-turbo-frame="modal">Deposit</a>
+        </li>
+        <%=current_user.username%>
+        balance <%=current_user.balance%>
+        bets <%= User.count_users_with_bets%>
+        Active Users: <%= User.logged_in_count %>
+          
+
+        
+        <% end %>
+        <%if user_signed_in?%>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            More
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="<%= withdraws_new_path %>">Withdraw</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <%= button_to "Log out", logout_path, method: :delete, class: "dropdown-item" %>
+          </ul>
+        </li>
+        <%end%>
+      </ul>
+    </div>
+  </div>
+</nav>

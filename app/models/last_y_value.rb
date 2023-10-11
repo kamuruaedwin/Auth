@@ -1,0 +1,2 @@
+class LastYValue < ApplicationRecord
+end

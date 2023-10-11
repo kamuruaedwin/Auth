@@ -1,0 +1,2 @@
+module LastYValuesHelper
+end

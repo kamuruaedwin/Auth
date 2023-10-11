@@ -1,0 +1,47 @@
+ <!-- Bet form when logged in -->
+    <% if user_signed_in? %>
+    <div id="bet-container">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+            <h5>Place Bet</h5>
+            </div>
+            <div class="card-body">
+                <%= form_with(model: @bet, url: bets_path, method: :post,local:true) do |form| %>
+                <!-- Add form bet form requirements here -->
+                <%= form.hidden_field :user_id, value: current_user.id %>
+                <%= form.hidden_field :betid, id: 'betid' %>
+                
+                
+               <div class="form-group">
+
+                  <label for="stake_amount">Amount To Bet</label>
+                  <input type="number" class="form-control" name="bet[stake_amount]" id="stake_amount" placeholder="Enter stake amount">
+                  
+                </div>
+
+                <div class="form-group">
+                  <label for="predicted_y_value">Your Prediction</label>
+                  <input type="number" class="form-control" name="bet[predicted_y_value]" id="predicted_y_value" placeholder="Enter your prediction"> 
+                </div>
+
+
+                <div class="actions">
+                    <%= form.submit "Place Bet" %>
+                </div>
+                <% end %>
+            </div>
+        </div>
+    </div>
+    <% else %>
+    <div id="bet-container">
+        <div class="card" style="width: 100%">
+            <div class="card-header">
+                <p class="card-title">Login To Play</p>
+            </div>
+            <div class="card-body">
+                <%= link_to 'Register', new_registration_path %><br>
+                <%= link_to 'Login', new_session_path %>
+            </div>
+        </div>
+    </div>
+    <% end %>

@@ -1,0 +1,27 @@
+<!-- app/views/deposits/new.html.erb -->
+<%= turbo_frame_tag "modal" do %>
+<div class="modal">
+  <div id ="bet-container">
+   <div class="card" style="width: 100%">
+      <div class="card-header">
+         <p class="card-title">Deposit</h5p>
+      </div>
+        <div class="card-body">
+          <%= form_for @deposit, url: deposits_path, method: "post", remote: true do |f| %>
+            <div class="form-group">
+                  <!-- Pre-fill the phone_number field with the user's phone number -->
+             <!-- Pre-fill the phone_number field with the user's phone number -->
+              <%= hidden_field_tag :phone_number, current_user.phone_number %>
+              
+              <%= f.label :amount, 'Deposit Amount',required: true %>
+              <%= f.number_field :amount, class: 'form-control', step: '1', required: true%>
+            </div>
+            <!-- <%= f.submit 'Deposit', class: 'btn btn-primary' %> -->
+            <%= link_to "Deposit", "#", data: {controller: "modals", action: "modals#close"},class: "close" %>
+          <% end %>
+        </div>
+      </div>
+     </div>
+    </div>
+</div>
+<% end %>
