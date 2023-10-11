@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  burst_value: 1.5
+  hashvalue: MyString
+  user: one
+
+two:
+  burst_value: 1.5
+  hashvalue: MyString
+  user: two

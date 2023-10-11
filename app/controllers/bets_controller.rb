@@ -32,6 +32,18 @@ class BetsController < ApplicationController
     end
   end
 
+  def save_burst_data
+      burst_value = params[:burst_value]
+      hashvalue = params[:hashvalue]
+      # Save both burst_value and hashvalue in the database, associated with the current user or bet
+      # Add your logic to save these values, for example:
+      # current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
+      #Save both burst_value and hashvalue in the database, associated with the current user
+      @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
+
+      # Respond as needed
+      render json: { status: 'Success', message: 'Burst data saved' }
+  end
 
 
   def determine_outcome

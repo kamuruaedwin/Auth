@@ -15,6 +15,7 @@
       const context = canvas.getContext('2d');
       const animationDuration = 15000; // Animation duration in milliseconds
       let animationStartTime;
+      let burst_value;
       let animationIsRunning = true; // Initially, the animation is running
       let randomStopTime = Math.random() * 15000; // Random stopping point (approximately 30 seconds);
       let clearAnimationTimeout;
@@ -100,6 +101,7 @@
 
       function stopAnimation(value) {
         animationIsRunning = false;
+        burst_value = value;
         hashvalue = generateHashvalue();
         lastYValues.push({ hashvalue, value });
         if (lastYValues.length > maxLastValues) {
@@ -124,10 +126,27 @@
             timerDisplay.textContent = '';
           }
         }, 1000);
-        
+
         clearAnimationTimeout = setTimeout(() => {
           clearAnimation();
         }, 3000);
+
+        $.ajax({
+            type: 'POST',
+            url: 'http://localhost:3000/bets/save_burst_value', // Create a new route in your Rails routes file
+            data: {
+              
+              burst_value: burst_value, // Include the burst_value in the data
+              hashvalue: hashvalue
+            },
+            success: function(response) {
+              // Handle the success response from the server, if needed
+            },
+            error: function(error) {
+              // Handle any errors, if needed
+            }
+          });       
+        
       }
 
       function clearAnimation() {

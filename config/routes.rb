@@ -11,6 +11,7 @@ post '/data/receive_data', to: 'data#receive_data'
 
 # get 'bets/new'
 resources :bets, only: [:new, :create]
+post '/bets/save_burst_value', to: 'bets#save_burst_value'
 
 get 'deposits/new'
 get 'deposits/create'

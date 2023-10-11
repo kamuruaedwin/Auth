@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_11_132919) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_11_181046) do
   create_table "animation_data", force: :cascade do |t|
     t.string "hashvalue"
     t.float "burst_value"
@@ -27,6 +27,15 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_11_132919) do
     t.string "betid"
     t.decimal "outcome"
     t.index ["user_id"], name: "index_bets_on_user_id"
+  end
+
+  create_table "burst_data", force: :cascade do |t|
+    t.float "burst_value"
+    t.string "hashvalue"
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_burst_data_on_user_id"
   end
 
   create_table "deposits", force: :cascade do |t|
@@ -74,6 +83,7 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_11_132919) do
   end
 
   add_foreign_key "bets", "users"
+  add_foreign_key "burst_data", "users"
   add_foreign_key "deposits", "users"
   add_foreign_key "messages", "users"
   add_foreign_key "withdraws", "users"
