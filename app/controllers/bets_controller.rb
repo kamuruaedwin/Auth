@@ -27,25 +27,27 @@ class BetsController < ApplicationController
     end
   end
 
-    def save_burst_data
-      begin
-        burst_data = params[:burst_data]
-        burst_value = burst_data[:burst_value]
-        hashvalue = burst_data[:hashvalue]
+  # In your Rails controller (bets_controller.rb)
+def save_burst_data
+  begin
+    burst_data = params[:burst_data]
+    burst_value = burst_data[:burst_value]
+    hashvalue = burst_data[:hashvalue]
 
-        # Save both burst_value and hashvalue in the database, associated with the current user
-        # Adjust the code according to your model and association structure
-        @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
+    # Save both burst_value and hashvalue in the database, associated with the current user
+    # Adjust the code according to your model and association structure
+    @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
 
-        if @burst_data.save
-          render json: { status: 'Success', message: 'Burst data saved' }
-        else
-          render json: { error: @burst_data.errors.full_messages }, status: :unprocessable_entity
-        end
-      rescue ActiveRecord::RecordInvalid => e
-        render json: { error: e.message }, status: :unprocessable_entity
-      end
+    if @burst_data.save
+      render json: { status: 'Success', message: 'Burst data saved' }
+    else
+      render json: { error: @burst_data.errors.full_messages }, status: :unprocessable_entity
     end
+  rescue ActiveRecord::RecordInvalid => e
+    render json: { error: e.message }, status: :unprocessable_entity
+  end
+end
+
 
   def determine_outcome
     @bet = Bet.find(params[:id])
