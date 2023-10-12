@@ -13,6 +13,9 @@ class BetsController < ApplicationController
     @bet.betid = SecureRandom.hex(6) # Generate a 6-character hexadecimal betid
 
     if @bet.save
+      # Store the bet_id in the user's session
+      session[:bet_id] = @bet.betid
+      
       # Deduct stake_amount from balance on placing the bet
       current_user.balance -= @bet.stake_amount
       current_user.save
@@ -27,26 +30,73 @@ class BetsController < ApplicationController
     end
   end
 
-  # In your Rails controller (bets_controller.rb)
-def save_burst_data
-  begin
-    burst_data = params[:burst_data]
-    burst_value = burst_data[:burst_value]
-    hashvalue = burst_data[:hashvalue]
+  #Working burst_data_save
+# def save_burst_data
+#   begin
+#     burst_data = params[:burst_data]
+#     burst_value = burst_data[:burst_value]
+#     hashvalue = burst_data[:hashvalue]
 
-    # Save both burst_value and hashvalue in the database, associated with the current user
-    # Adjust the code according to your model and association structure
-    @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
+   
 
-    if @burst_data.save
-      render json: { status: 'Success', message: 'Burst data saved' }
-    else
-      render json: { error: @burst_data.errors.full_messages }, status: :unprocessable_entity
+#     # Save both burst_value and hashvalue in the database, associated with the current user
+#     # Adjust the code according to your model and association structure
+#     @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
+
+#      # Create a new BurstData record
+#     @burst_data = BurstData.create(burst_value: burst_value)
+
+#      # Associate it with a bet if bet_id is provided
+#     if bet_id
+#       @bet = Bet.find_by(betid: betid)
+#       if @bet
+#         @burst_data.bet = @bet
+#         @burst_data.save
+#       end
+#     end
+
+
+#     if @burst_data.save
+#       render json: { status: 'Success', message: 'Burst data saved' }
+#     else
+#       render json: { error: @burst_data.errors.full_messages }, status: :unprocessable_entity
+#     end
+#   rescue ActiveRecord::RecordInvalid => e
+#     render json: { error: e.message }, status: :unprocessable_entity
+#   end
+# end
+  def save_burst_data
+    begin
+      # Extract burst_data from the params
+      burst_data = params[:burst_data]
+      burst_value = burst_data[:burst_value]
+      hashvalue = burst_data[:hashvalue]
+      betid = burst_data[:betid] # Assuming that the betid is sent in the burst_data
+
+      if betid.present?
+        # Find the corresponding bet using the betid
+        @bet = Bet.find_by(betid: betid)
+
+        if @bet.nil?
+          render json: { error: 'Bet not found' }, status: :unprocessable_entity
+          return
+        end
+      else
+        @bet = nil
+      end
+
+      # Create a new BurstData record
+      @burst_data = BurstData.create(burst_value: burst_value, hashvalue: hashvalue, bet: @bet)
+
+      if @burst_data.save
+        render json: { status: 'Success', message: 'Burst data saved' }
+      else
+        render json: { error: @burst_data.errors.full_messages }, status: :unprocessable_entity
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { error: e.message }, status: :unprocessable_entity
     end
-  rescue ActiveRecord::RecordInvalid => e
-    render json: { error: e.message }, status: :unprocessable_entity
   end
-end
 
 
   def determine_outcome

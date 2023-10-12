@@ -140,20 +140,26 @@
                   timerDisplay.textContent = '';
                 }
               }, 1000);
-              $.ajax({
-                      type: 'POST',
-                      url: '/bets/determine_outcome', // Update the route as needed
-                      data: {
-                        bet_id: @bet.id, // Pass the bet's ID to identify which bet to update
-                        burst_value: burst_value // Include any other required data
-                      },
-                      success: function(response) {
-                        // Handle the success response, if needed
-                      },
-                      error: function(error) {
-                        // Handle any errors, if needed
-                      }
-                    });
+
+              //working ajax code
+                 $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3000/bets/save_burst_data', // Update the URL as needed
+                data: {
+                    'burst_data[burst_value]': burst_value,
+                    'burst_data[hashvalue]': hashvalue,
+                    
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name=csrf-token]').attr('content'));
+                },
+                success: function(response) {
+                    // Handle the success response from the server, if needed
+                },
+                error: function(error) {
+                    // Handle any errors, if needed
+                }
+            });
               // Clear the animation after 3 seconds
             clearAnimationTimeout = setTimeout(() => {
                       clearAnimation();
