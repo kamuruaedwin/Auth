@@ -132,20 +132,23 @@
         }, 3000);
 
         $.ajax({
-            type: 'POST',
-            url: 'http://localhost:3000/bets/save_burst_value', // Create a new route in your Rails routes file
-            data: {
-              
-              burst_value: burst_value, // Include the burst_value in the data
-              hashvalue: hashvalue
-            },
-            success: function(response) {
-              // Handle the success response from the server, if needed
-            },
-            error: function(error) {
-              // Handle any errors, if needed
-            }
-          });       
+    type: 'POST',
+    url: 'http://localhost:3000/bets/save_burst_data', // Update the URL as needed
+    data: {
+        'burst_data[burst_value]': burst_value,
+        'burst_data[hashvalue]': hashvalue
+    },
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name=csrf-token]').attr('content'));
+    },
+    success: function(response) {
+        // Handle the success response from the server, if needed
+    },
+    error: function(error) {
+        // Handle any errors, if needed
+    }
+});
+
         
       }
 

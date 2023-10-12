@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :deposits
   has_many :messages, dependent: :destroy
   has_many :withdraws
+  has_many :burst_data
 
   validates :phone_number, presence: true, uniqueness: true
   validates :username, presence: true, uniqueness: true

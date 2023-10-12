@@ -2,67 +2,68 @@
 class BetsController < ApplicationController
   before_action :set_user, only: [:create]
   before_action :initialize_burst_value, only: [:create]
+  
   def new
     @bet = Bet.new
     @bet.betid = SecureRandom.hex(6) # Generate a 6-character hexadecimal betid
   end
 
   def create
-    # Simulate the animation's progress (replace this with your actual animation logic)
     @bet = current_user.bets.build(bet_params)
-
     @bet.betid = SecureRandom.hex(6) # Generate a 6-character hexadecimal betid
 
-    
     if @bet.save
-
-      #deduct stake_amount from balance on placing bet
+      # Deduct stake_amount from balance on placing the bet
       current_user.balance -= @bet.stake_amount
-      current_user.save      
-      
-     
+      current_user.save
+
       # Output the betid to the log
       puts "Generated betid: #{@bet.betid}"
 
       flash[:success] = "Bet placed successfully!"
       redirect_to root_path
-
     else
       render :new
     end
   end
 
-  def save_burst_data
-      burst_value = params[:burst_value]
-      hashvalue = params[:hashvalue]
-      # Save both burst_value and hashvalue in the database, associated with the current user or bet
-      # Add your logic to save these values, for example:
-      # current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
-      #Save both burst_value and hashvalue in the database, associated with the current user
-      @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
+    def save_burst_data
+      begin
+        burst_data = params[:burst_data]
+        burst_value = burst_data[:burst_value]
+        hashvalue = burst_data[:hashvalue]
 
-      # Respond as needed
-      render json: { status: 'Success', message: 'Burst data saved' }
-  end
+        # Save both burst_value and hashvalue in the database, associated with the current user
+        # Adjust the code according to your model and association structure
+        @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
 
+        if @burst_data.save
+          render json: { status: 'Success', message: 'Burst data saved' }
+        else
+          render json: { error: @burst_data.errors.full_messages }, status: :unprocessable_entity
+        end
+      rescue ActiveRecord::RecordInvalid => e
+        render json: { error: e.message }, status: :unprocessable_entity
+      end
+    end
 
   def determine_outcome
     @bet = Bet.find(params[:id])
-  # Calculate the outcome based on animation progress and predicted value
-  if @burst_value >= @bet.predicted_y_value
-    @bet.outcome = @bet.stake_amount * @bet.predicted_y_value
-    flash[:success] = "Congratulations you won!"
-  else
-    @bet.outcome = 0
-  end
-  @bet.save
-  
-  # Update the user's balance based on the outcome
-  current_user.balance += @bet.outcome
-  current_user.save
+    # Calculate the outcome based on animation progress and predicted value
+    if @burst_value >= @bet.predicted_y_value
+      @bet.outcome = @bet.stake_amount * @bet.predicted_y_value
+      flash[:success] = "Congratulations, you won!"
+    else
+      @bet.outcome = 0
+    end
+    @bet.save
 
-  # Redirect or respond as needed
-end
+    # Update the user's balance based on the outcome
+    current_user.balance += @bet.outcome
+    current_user.save
+
+    # Redirect or respond as needed
+  end
 
   private 
 
@@ -70,9 +71,9 @@ end
     @user = current_user
   end
 
-
   def initialize_burst_value
-    @burst_value = 1  # Initialize with the starting value (modify as needed)
+    # Initialize @burst_value with the starting value (modify as needed)
+    @burst_value = 1
   end
 
   def bet_params

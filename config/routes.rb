@@ -8,10 +8,11 @@ resources :passwords
 delete 'logout' => 'sessions#destroy', as: :logout
 
 post '/data/receive_data', to: 'data#receive_data'
+post 'bets/save_burst_data'
 
 # get 'bets/new'
 resources :bets, only: [:new, :create]
-post '/bets/save_burst_value', to: 'bets#save_burst_value'
+post '/bets/save_burst_data', to: 'bets#save_burst_data'
 
 get 'deposits/new'
 get 'deposits/create'
