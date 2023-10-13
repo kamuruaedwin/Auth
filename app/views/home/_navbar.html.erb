@@ -9,22 +9,20 @@
 <body>
     <nav class="navbar">
         <div class="navbar-logo">
-            <a href="#">PesaFast</a>
+            <a class="navbar-brand" href="#"><strong>PesaFast</strong><br>Play Win Play</a>
         </div>
         <%=current_user.username%>
         balance <%=current_user.balance%>
         bets <%= User.count_users_with_bets%>
-        Active Users: <%= User.logged_in_count %>
-          
+        Active Users: <%= User.logged_in_count %>          
         <div class="navbar-links">
+            <% if user_signed_in? %>            
             <a class="nav-link flex-grow-1" href="<%= deposits_new_path %>" data-turbo-frame="modal">Deposit</a>
-             <a class="nav-link flex-grow-1" href="<%= deposits_new_path %>" data-turbo-frame="modal">Deposit</a>
-             <a class="nav-link flex-grow-1" href="<%= deposits_new_path %>" data-turbo-frame="modal">Deposit</a>
-            <a class="nav-link flex-grow-1" href="<%= deposits_new_path %>" data-turbo-frame="modal">Deposit</a>
-             
-            <a class="dropdown-item" href="<%= withdraws_new_path %>">Withdraw</a>
-            <li><hr class="dropdown-divider"></li>
-            <%= button_to "Log out", logout_path, method: :delete, class: "dropdown-item" %>
+            <a class="nav-link flex-grow-1" href="<%= withdraws_new_path %>">Withdraw</a>
+             <%= button_to "Log out", logout_path, method: :delete, class: "nav-link flex-grow-1" %>
+            <%end%>         
+          
+                   
           </ul>
         </li>
         </div>

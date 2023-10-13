@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_10_12_203050) do
+ActiveRecord::Schema[7.1].define(version: 2023_10_13_201547) do
   create_table "animation_data", force: :cascade do |t|
     t.string "hashvalue"
     t.float "burst_value"
@@ -74,6 +74,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_10_12_203050) do
     t.integer "user_id"
     t.integer "balance"
     t.boolean "logged_in", default: false
+    t.string "firstname"
+    t.string "middlename"
     t.index ["user_id"], name: "index_users_on_user_id"
   end
 

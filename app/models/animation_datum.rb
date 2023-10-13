@@ -1,2 +1,0 @@
-class AnimationDatum < ApplicationRecord
-end

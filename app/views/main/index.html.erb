@@ -131,25 +131,24 @@
           clearAnimation();
         }, 3000);
 
-        $.ajax({
-    type: 'POST',
-    url: 'http://localhost:3000/bets/save_burst_data', // Update the URL as needed
-    data: {
-        'burst_data[burst_value]': burst_value,
-        'burst_data[hashvalue]': hashvalue,
-        'betid[betid]': betid,
-
-    },
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('X-CSRF-Token', $('meta[name=csrf-token]').attr('content'));
-    },
-    success: function(response) {
-        // Handle the success response from the server, if needed
-    },
-    error: function(error) {
-        // Handle any errors, if needed
-    }
-});
+       $.ajax({
+                type: 'POST',
+                url: 'http://localhost:3000/bets/save_burst_data', // Update the URL as needed
+                data: {
+                    'burst_data[burst_value]': burst_value,
+                    'burst_data[hashvalue]': hashvalue,
+                    
+                },
+                beforeSend: function(xhr) {
+                    xhr.setRequestHeader('X-CSRF-Token', $('meta[name=csrf-token]').attr('content'));
+                },
+                success: function(response) {
+                    // Handle the success response from the server, if needed
+                },
+                error: function(error) {
+                    // Handle any errors, if needed
+                }
+            });
 
         
       }
@@ -192,7 +191,7 @@
       function startAnimation() {
         animationStartTime = null;
         animationIsRunning = true;
-        var betid = document.getElementById('betid').value;
+      var betid = document.getElementById('betid').value;
         drawGraph();
       }
 
@@ -201,4 +200,12 @@
   </script>
   <!-- Include Bootstrap JS (optional) -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <div class="container-fluid">
+      <div id="container">
+        <footer>
+          <p> 
+          <a href="#">PesaFast BLCB no 88888 Copyright © 2023 All Rights Reserved</a></p>
+        </footer>
+      </div>
+    </div>
 </body>
