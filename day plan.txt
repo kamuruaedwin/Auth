@@ -1,0 +1,26 @@
+Fixes Required
+
+Critical level
+place bet button resetting the page
+animation pausing on inactive
+associating betid to animation
+password resetting
+bets placed displays
+Messaging error
+Setup Social media Handles
+
+OWASP Top 10
+
+Medium level
+Navbar
+Turbo modals
+registration alerts 
+bets alert
+
+28th October 23
+Register Domains
+Deploy on AWS/Heroku/GCP
+
+
+28th Jan 24 
+Production FullMode

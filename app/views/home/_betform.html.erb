@@ -9,7 +9,7 @@
                 <%= form_with(model: @bet, url: bets_path, method: :post,local:true) do |form| %>
                 <!-- Add form bet form requirements here -->
                 <%= form.hidden_field :user_id, value: current_user.id %>
-                <div id="betid"><%= form.hidden_field :betid, id: 'betid' %></div>
+                  <%= form.hidden_field :betid, id: 'betid', value: @bet.betid, style: 'display: none;' %>
                 
                 
                <div class="form-group">

@@ -36,6 +36,7 @@ def save_burst_data
     burst_data = params[:burst_data]
     burst_value = burst_data[:burst_value]
     hashvalue = burst_data[:hashvalue]
+    betid = burst_data[:betid]
 
    
 
@@ -47,7 +48,7 @@ def save_burst_data
     @burst_data = BurstData.create(burst_value: burst_value)
 
      # Associate it with a bet if bet_id is provided
-    if bet_id
+    if betid
       @bet = Bet.find_by(betid: betid)
       if @bet
         @burst_data.bet = @bet
@@ -97,6 +98,11 @@ end
   #     render json: { error: e.message }, status: :unprocessable_entity
   #   end
   # end
+# endpoint to retrieve the betid
+  def get_bet_id
+    betid = session[:bet_id]
+    render json: { bet_id: betid }
+  end
 
 
   def determine_outcome
