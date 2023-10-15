@@ -5,7 +5,6 @@ class BetsController < ApplicationController
   
   def new
     @bet = Bet.new
-    @bet.betid = SecureRandom.hex(6) # Generate a 6-character hexadecimal betid
   end
 
   def create

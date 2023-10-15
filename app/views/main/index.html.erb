@@ -18,8 +18,12 @@
       let animationStartTime;
       let burst_value;
       // Retrieve the bet_id from the DOM element
-      const betidElement = document.getElementById('betid');
-      const betid = betidElement.textContent;
+      // const betidElement = document.getElementById('betid');
+      // const betid = betidElement.textContent;
+      // Retrieve the bet_id from the data attribute of the container element
+      const container = document.getElementById('container');
+      const betid = container.getAttribute('data-betid');
+
       let animationIsRunning = true; // Initially, the animation is running
       let randomStopTime = Math.random() * 15000; // Random stopping point (approximately 30 seconds);
       let clearAnimationTimeout;
