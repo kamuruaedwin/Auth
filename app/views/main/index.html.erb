@@ -117,7 +117,11 @@
         hashvalueToValueMap[hashvalue] = value;
         displayLastValues();
         updateTable();
-
+         // Disable the "Place Bet" button
+        const placeBetButton = document.getElementById('placeBetButton');
+        if (placeBetButton) {
+          placeBetButton.disabled = false;
+        }
         let countdown = 5;
         timerDisplay.textContent = countdown;
         const countdownInterval = setInterval(() => {
@@ -196,7 +200,12 @@
       function startAnimation() {
         animationStartTime = null;
         animationIsRunning = true;
-      var betid = document.getElementById('betid').value;
+         // Enable the "Place Bet" button
+      const placeBetButton = document.getElementById('placeBetButton');
+      if (placeBetButton) {
+        placeBetButton.disabled = true;
+      }
+      // var betid = document.getElementById('betid').value;
         drawGraph();
         
       }

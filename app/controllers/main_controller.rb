@@ -1,8 +1,8 @@
 class MainController < ApplicationController
-	# def index
-	# 	@messages = Message.order(created_at: :desc)
-	# 	@messages = Message.all # Or fetch messages from your database
-	# end
+	def index
+		@messages = Message.order(created_at: :desc)
+		@messages = Message.all # Or fetch messages from your database
+	end
 
 	def index
 	    @bet = Bet.new

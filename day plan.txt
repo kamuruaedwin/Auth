@@ -3,13 +3,16 @@ Fixes Required
 Critical level
 place bet button resetting the page
 animation pausing on inactive
+random stop function not calling in background
 associating betid to animation
 password resetting
 bets placed displays
 Messaging error
 Setup Social media Handles
 
-OWASP Top 10
+
+Security OWASP Top 10 research
+
 
 Medium level
 Navbar
