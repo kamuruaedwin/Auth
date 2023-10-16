@@ -11,21 +11,23 @@ class BetsController < ApplicationController
     @bet = current_user.bets.build(bet_params)
     @bet.betid = SecureRandom.hex(6) # Generate a 6-character hexadecimal betid
 
+respond_to do |format|
     if @bet.save
       # Store the bet_id in the user's session
-      session[:bet_id] = @bet.betid
-      
-      # Deduct stake_amount from balance on placing the bet
+      session[:bet_id] = @bet.betid     
       current_user.balance -= @bet.stake_amount
       current_user.save
-
       # Output the betid to the log
       puts "Generated betid: #{@bet.betid}"
 
-      flash[:success] = "Bet placed successfully!"
-      redirect_to root_path
+      format.html { redirect_to @bet, notice: 'Bet was successfully created.' }
+      format.js # This line is for handling JavaScript response
+      # flash[:success] = "Bet placed successfully!"
+      # redirect_to root_path
     else
-      render :new
+      # render :new
+      format.html { render :new }
+      format.js # This line is for handling JavaScript response
     end
   end
 

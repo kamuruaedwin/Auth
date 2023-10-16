@@ -29,6 +29,10 @@ gem "jbuilder"
 gem 'nokogiri', '~> 1.15'
 gem 'activesupport', '7.1.0'
 # gem 'rack-cors'
+gem 'jquery-rails'
+gem 'uglifier'
+gem 'turbolinks'
+
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"

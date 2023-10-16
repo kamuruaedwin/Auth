@@ -1,48 +1,43 @@
- <!-- Bet form when logged in -->
-    <% if user_signed_in? %>
-    <div id="bet-container">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-            <h5>Place Bet</h5>
-            </div>
-            <div class="card-body">
-                <%= form_with(model: @bet, url: bets_path, method: :post,local:true) do |form| %>
-                <!-- Add form bet form requirements here -->
-                <%= form.hidden_field :user_id, value: current_user.id %>
-                  <%= form.hidden_field :betid, id: 'betid', value: @bet.betid, style: 'display: none;' %>
+<!-- Bet form when logged in -->
+<% if user_signed_in? %>
+  <div id="bet-container">
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+        <h5>Place Bet</h5>
+      </div>
+      <div class="card-body">
+        <%= form_with(model: @bet, url: bets_path, method: :post, local: true, remote: true) do |form| %>
+          <!-- Add form bet form requirements here -->
+          <%= form.hidden_field :user_id, value: current_user.id %>
+          <%= form.hidden_field :betid, id: 'betid', value: @bet.betid, style: 'display: none;' %>
 
-                
-                
-               <div class="form-group">
+          <div class="form-group">
+            <label for="stake_amount">Amount To Bet</label>
+            <%= form.number_field :stake_amount, class: 'form-control', id: 'stake_amount', placeholder: 'Enter stake amount' %>
+          </div>
 
-                  <label for="stake_amount">Amount To Bet</label>
-                  <input type="number" class="form-control" name="bet[stake_amount]" id="stake_amount" placeholder="Enter stake amount">
-                  
-                </div>
+          <div class="form-group">
+            <label for="predicted_y_value">Your Prediction</label>
+            <%= form.number_field :predicted_y_value, class: 'form-control', id: 'predicted_y_value', placeholder: 'Enter your prediction' %>
+          </div>
 
-                <div class="form-group">
-                  <label for="predicted_y_value">Your Prediction</label>
-                  <input type="number" class="form-control" name="bet[predicted_y_value]" id="predicted_y_value" placeholder="Enter your prediction"> 
-                </div>
-
-
-                <div class="actions">
-                    <button id="placeBetButton" type="submit">Place Bet</button>
-                </div>
-                <% end %>
-            </div>
-        </div>
+          <div class="actions">
+            <%= form.submit 'Place Bet', id: 'placeBetButton', class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
     </div>
-    <% else %>
-    <div id="bet-container">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                <p class="card-title">Login To Play</p>
-            </div>
-            <div class="card-body">
-                <%= link_to 'Register', new_registration_path %><br>
-                <%= link_to 'Login', new_session_path %>
-            </div>
-        </div>
+  </div>
+<% else %>
+  <div id="bet-container">
+    <div class="card" style="width: 100%">
+      <div class="card-header">
+        <p class="card-title">Login To Play</p>
+      </div>
+      <div class="card-body">
+        <%= link_to 'Register', new_registration_path %><br>
+        <%= link_to 'Login', new_session_path %>
+      </div>
     </div>
-    <% end %>
+  </div>
+<% end %>
