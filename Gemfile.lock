@@ -15,6 +15,7 @@ GEM
       activesupport (= 7.1.0)
       mail (>= 2.7.1)
       net-imap
+      
       net-pop
       net-smtp
     actionmailer (7.1.0)
