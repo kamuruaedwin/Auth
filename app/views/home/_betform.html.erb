@@ -6,7 +6,10 @@
         <h5>Place Bet</h5>
       </div>
       <div class="card-body">
-        <%= form_with(model: @bet, url: bets_path, method: :post, remote: true) do |form| %>
+        <%= form_with(model: @bet, url: bets_path, method: :post, remote: true, id: 'bet-form') do |form| %>
+  <!-- Form fields and submit button as before -->
+
+
           <!-- Add form bet form requirements here -->
           <%= form.hidden_field :user_id, value: current_user.id %>
           <%= form.hidden_field :betid, id: 'betid', value: @bet.betid, style: 'display: none;' %>
@@ -47,3 +50,39 @@
     </div>
   </div>
 <% end %>
+--
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const betForm = document.getElementById('bet-form');
+    if (betForm) {
+      betForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // Serialize the form data
+        const formData = new FormData(betForm);
+
+        // Send an AJAX request to place the bet
+        fetch(betForm.action, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-CSRF-Token': document.querySelector('meta[name=csrf-token]').content
+          }
+        })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            // Handle a successful bet placement
+            console.log('Bet placed successfully!');
+          } else {
+            // Handle errors if the bet placement was not successful
+            console.error('Bet placement failed:', data.error);
+          }
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+      });
+    }
+  });
+</script>

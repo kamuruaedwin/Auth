@@ -111,7 +111,8 @@
         animationIsRunning = false;
         burst_value = value;
         hashvalue = generateHashvalue();
-        lastYValues.push({ hashvalue, value });
+        // Update the burst_value in the DOM
+             lastYValues.push({ hashvalue, value });
         if (lastYValues.length > maxLastValues) {
           const removedValue = lastYValues.shift();
           delete hashvalueToValueMap[removedValue.hashvalue];
@@ -142,7 +143,9 @@
         clearAnimationTimeout = setTimeout(() => {
           clearAnimation();
         }, 3000);
-
+        const burstValueElement = document.getElementById('burst-value');
+        burstValueElement.textContent = burst_value;
+         
        $.ajax({
                 type: 'POST',
                 url: 'http://localhost:3000/bets/save_burst_data', // Update the URL as needed durin
