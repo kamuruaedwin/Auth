@@ -6,67 +6,77 @@ class BetsController < ApplicationController
   def new
     @bet = Bet.new
   end
+  def show
+    @user = User.new 
+    @bet = Bet.find(params[:id])
+    if @bet.nil?
+    # Handle the case where the bet is not found, e.g., redirect to an error page or show a message
+    flash[:error] = "Bet not found."
+    redirect_to root_path
+  end
+  end
 
   def create
     @bet = current_user.bets.build(bet_params)
     @bet.betid = SecureRandom.hex(6) # Generate a 6-character hexadecimal betid
 
-respond_to do |format|
-    if @bet.save
-      # Store the bet_id in the user's session
-      session[:bet_id] = @bet.betid     
-      current_user.balance -= @bet.stake_amount
-      current_user.save
-      # Output the betid to the log
-      puts "Generated betid: #{@bet.betid}"
+    respond_to do |format|
+      if @bet.save
+        # Store the bet_id in the user's session
+        session[:bet_id] = @bet.betid     
+        current_user.balance -= @bet.stake_amount
+        current_user.save
+        # Output the betid to the log
+        puts "Generated betid: #{@bet.betid}"
 
-      format.html { redirect_to @bet, notice: 'Bet was successfully created.' }
-      format.js # This line is for handling JavaScript response
-      # flash[:success] = "Bet placed successfully!"
-      # redirect_to root_path
-    else
-      # render :new
-      format.html { render :new }
-      format.js # This line is for handling JavaScript response
-    end
-  end
-
-  #Working burst_data_save
-def save_burst_data
-  begin
-    burst_data = params[:burst_data]
-    burst_value = burst_data[:burst_value]
-    hashvalue = burst_data[:hashvalue]
-    betid = burst_data[:betid]
-
-   
-
-    # Save both burst_value and hashvalue in the database, associated with the current user
-    # Adjust the code according to your model and association structure
-    @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
-
-     # Create a new BurstData record
-    @burst_data = BurstData.create(burst_value: burst_value)
-
-     # Associate it with a bet if bet_id is provided
-    if betid
-      @bet = Bet.find_by(betid: betid)
-      if @bet
-        @burst_data.bet = @bet
-        @burst_data.save
+        format.html { redirect_to @bet, notice: 'Bet was successfully created.' }
+        format.js # This line is for handling JavaScript response
+        # flash[:success] = "Bet placed successfully!"
+        # redirect_to root_path
+      else
+        # render :new
+        format.html { render :new }
+        format.js # This line is for handling JavaScript response
       end
     end
-
-
-    if @burst_data.save
-      render json: { status: 'Success', message: 'Burst data saved' }
-    else
-      render json: { error: @burst_data.errors.full_messages }, status: :unprocessable_entity
-    end
-  rescue ActiveRecord::RecordInvalid => e
-    render json: { error: e.message }, status: :unprocessable_entity
   end
-end
+
+    #Working burst_data_save
+  def save_burst_data
+    begin
+      burst_data = params[:burst_data]
+      burst_value = burst_data[:burst_value]
+      hashvalue = burst_data[:hashvalue]
+      betid = burst_data[:betid]
+
+     
+
+      # Save both burst_value and hashvalue in the database, associated with the current user
+      # Adjust the code according to your model and association structure
+      @burst_data = current_user.burst_data.create(burst_value: burst_value, hashvalue: hashvalue)
+
+       # Create a new BurstData record
+      @burst_data = BurstData.create(burst_value: burst_value)
+
+       # Associate it with a bet if bet_id is provided
+      if betid
+        @bet = Bet.find_by(betid: betid)
+        if @bet
+          @burst_data.bet = @bet
+          @burst_data.save
+        end
+      end
+
+
+      if @burst_data.save
+        render json: { status: 'Success', message: 'Burst data saved' }
+      else
+        render json: { error: @burst_data.errors.full_messages }, status: :unprocessable_entity
+      end
+    rescue ActiveRecord::RecordInvalid => e
+      render json: { error: e.message }, status: :unprocessable_entity
+    end
+  end
   # def save_burst_data
   #   begin
   #     # Extract burst_data from the params
@@ -101,8 +111,8 @@ end
   # end
 # endpoint to retrieve the betid
   def get_bet_id
-    betid = session[:bet_id]
-    render json: { bet_id: betid }
+    betid = session[:betid]
+    render json: { betid: betid }
   end
 
 

@@ -18,6 +18,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- Include Bootstrap CSS -->
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  
     <!-- Include Chart.js -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
     <!-- Include CryptoJS -->
@@ -46,7 +48,7 @@
     <div class="container-fluid">
      
       <%= render 'home/header'%>
-   
+    
       <!-- <%= turbo_frame_tag "modal" %> -->
       <%= yield %>
 
@@ -70,6 +72,11 @@
     });
   });
 </script>
+
+<%= render 'registrations/signup'%>
+<%= render 'sessions/modal'%>
+<%= render 'deposits/modal'%>
+
 
   </body>
  
