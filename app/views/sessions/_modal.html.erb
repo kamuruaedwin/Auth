@@ -7,8 +7,20 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body d-flex flex-column align-items-center">
+           <div class="modal-body d-flex flex-column align-items-center">
         <%= form_with model: @user, url: sessions_path, remote: true do |form| %>
+          <% if flash[:error].present? %>
+            <div class="alert alert-danger">
+              <%= flash[:error] %>
+            </div>
+          <% end %>
+
+          <% if flash[:success].present? %>
+            <div class="alert alert-success">
+              <%= flash[:success] %>
+            </div>
+          <% end %>
+
           <div class="form-group">
             <%= form.label :phone_number %><br />
             <%= form.text_field :phone_number, autofocus: true, autocomplete: "phone_number" %>
@@ -24,6 +36,7 @@
           </div>
         <% end %>
       </div>
+
     </div>
   </div>
 </div>
