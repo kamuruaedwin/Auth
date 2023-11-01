@@ -1,6 +1,7 @@
 Fixes Required
 
 Critical level
+Mobile ux friendliness
 place bet button resetting the page
 animation pausing on inactive
 random stop function not calling in background
@@ -8,7 +9,9 @@ associating betid to animation
 password resetting
 bets placed displays
 Messaging error
-Setup Social media Handles
+Create Social media Handles
+Design social media posters
+random stop is the period expiration not entirely random
 
 
 Security OWASP Top 10 research
@@ -16,7 +19,7 @@ Security OWASP Top 10 research
 
 Medium level
 Navbar
-Turbo modals
+
 registration alerts 
 bets alert
 
@@ -26,4 +29,4 @@ Deploy on AWS/Heroku/GCP
 
 
 28th Jan 24 
-Production FullMode
+Production FullMode 

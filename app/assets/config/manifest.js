@@ -2,5 +2,6 @@
 //= link application.css
 //= link application.js
 //= link styles.css
-
+//= link chart.js
 //= link_directory ../stylesheets
+

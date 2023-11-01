@@ -6,15 +6,15 @@ class BetsController < ApplicationController
   def new
     @bet = Bet.new
   end
-  def show
-    @user = User.new 
-    @bet = Bet.find(params[:id])
-    if @bet.nil?
-    # Handle the case where the bet is not found, e.g., redirect to an error page or show a message
-    flash[:error] = "Bet not found."
-    redirect_to root_path
-  end
-  end
+  # def show
+  #   @user = User.new 
+  #   @bet = Bet.find(params[:id])
+  #   if @bet.nil?
+  #   # Handle the case where the bet is not found, e.g., redirect to an error page or show a message
+  #   flash[:error] = "Bet not found."
+  #   redirect_to root_path
+  # end
+  # end
 
   def create
     @bet = current_user.bets.build(bet_params)
@@ -29,7 +29,7 @@ class BetsController < ApplicationController
         # Output the betid to the log
         puts "Generated betid: #{@bet.betid}"
 
-        format.html { redirect_to @bet, notice: 'Bet was successfully created.' }
+        format.html { redirect_to root_path, notice: 'Bet was successfully created.' }
         format.js # This line is for handling JavaScript response
         # flash[:success] = "Bet placed successfully!"
         # redirect_to root_path

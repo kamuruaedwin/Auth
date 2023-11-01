@@ -1,22 +1,3 @@
-  /* Style the navbar */
-        .navbar {
-
-            background-color: orange;
-           
-            display: flex;
-        }
-
-        /* Style the PesaFast label */
-        /*.navbar-brand {
-            color: blue;
-            font-size:35 ;
-            font-style: ;
-            font: 28;
-        }
-        .nabar-item{
-            flex:1;
-        }*/
-/*       */*/
 body {
     margin: 0;
     padding: 0;
