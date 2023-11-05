@@ -17,29 +17,28 @@ class BetsController < ApplicationController
   end
 
 def create
-    @bet = current_user.bets.build(bet_params)
-    @bet.betid = SecureRandom.hex(6) # Generate a 6-character hexadecimal betid
-    @bet.burst_value =0
-    @bet.total_outcome = 0
+  @bet = current_user.bets.build(bet_params)
+  @bet.betid = SecureRandom.hex(6)
+  @bet.burst_value = 0
+  @bet.total_outcome = 0
 
+  if @bet.save
+    session[:bet_id] = @bet.betid
+    current_user.balance -= @bet.stake_amount
+    current_user.save
 
     respond_to do |format|
-      if @bet.save
-        # Store the bet_id in the user's session
-        session[:bet_id] = @bet.betid     
-        current_user.balance -= @bet.stake_amount
-
-        current_user.save
-        Rails.logger.info "Generated betid: #{@bet.betid}"
-
-        format.js { redirect_to root_path, notice: 'Bet was successfully created.' }
-        # format.js # If you intend to use AJAX
-      else
-        # format.html { render :new }
-        format.js # If you intend to use AJAX
-      end
+      format.html { redirect_to root_path, notice: 'Bet was successfully created.' }
+      format.js # You can render JavaScript here for AJAX requests
+    end
+  else
+    respond_to do |format|
+      format.html { render :new }
+      format.js # You can render JavaScript here for AJAX requests
     end
   end
+end
+
 
 
 # Working burst_data_save
@@ -65,7 +64,7 @@ def save_burst_data
     else
       bets.each do |bet|
         # Update each bet's burst_value
-        bet.update(burst_value: burst_value)
+        bet.update(burst_value: burst_value, hashvalue: hashvalue)
 
         # Calculate the bet outcome based on the updated burst_value
         if bet.predicted_y_value.present? && bet.stake_amount.present?
