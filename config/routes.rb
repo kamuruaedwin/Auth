@@ -14,6 +14,9 @@ post 'bets/save_burst_data'
 resources :bets
 post '/bets/save_burst_data', to: 'bets#save_burst_data'
 
+get '/bet_history', to: 'bets#bet_history'
+
+
 
   # resources :bets do
   #   collection do

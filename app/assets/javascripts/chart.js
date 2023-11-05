@@ -1,7 +1,7 @@
       document.addEventListener("DOMContentLoaded", () => {
       const canvas = document.getElementById('chart-container');
       const context = canvas.getContext('2d');
-      const animationDuration = 15000; // Animation duration in milliseconds
+      const animationDuration = 280000; // Animation duration in milliseconds
       let animationStartTime;
       let burst_value;
       const container = document.getElementById('container');
@@ -35,7 +35,7 @@
               type: 'linear',
               position: 'bottom',
               title: {
-                display: true,
+                display: false,
                 text: 'Time',
               },
             },
@@ -43,7 +43,7 @@
               type: 'linear',
               position: 'left',
               title: {
-                display: true,
+                display: false,
                 text: 'Value',
               },
               beginAtZero: false, // Do not start y-axis from zero
@@ -151,6 +151,7 @@
         
       }
 
+
       function clearAnimation() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         chart.data.labels = [];
@@ -186,6 +187,8 @@
         }
       }
 
+
+
       function startAnimation() {
         animationStartTime = null;
         animationIsRunning = true;
@@ -194,11 +197,11 @@
       if (placeBetButton) {
         placeBetButton.disabled = true;
       }
-      // var betid = document.getElementById('betid').value;
         drawGraph();
         
       }
       startAnimation();
      
     });
-    
+
+        

@@ -12,7 +12,8 @@
 
 
         <% if user_signed_in? %>
-        
+        <li><%= link_to 'Bet History', bet_history_path %></li>
+         
         <%=current_user.username%>
         balance <%=current_user.balance%>
         bets <%= User.count_users_with_bets%>

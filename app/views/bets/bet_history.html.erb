@@ -1,0 +1,27 @@
+<!-- app/views/bets/bet_history.html.erb -->
+<h1>Your Bet History</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th>Bet ID</th>
+      <th>Stake Amount</th>
+      <th>Predicted Y Value</th>
+      <th>burst_value</th>
+      <th>Results</th>
+      <!-- Add more table headers as needed -->
+    </tr>
+  </thead>
+  <tbody>
+    <% @bets.each do |bet| %>
+      <tr>
+        <td><%= bet.betid %></td>
+        <td><%= bet.stake_amount %></td>
+        <td><%= bet.predicted_y_value %></td>
+        <td><%= bet.burst_value %></td>
+        <td><%= bet.outcome%></td>
+
+        <!-- Add more table cells for other bet attributes -->
+      </tr>
+    <% end %>
+  </tbody>
+</table>

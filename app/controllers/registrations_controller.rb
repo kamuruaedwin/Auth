@@ -1,6 +1,7 @@
 class RegistrationsController < ApplicationController
   def new
     @user = User.new
+    p @user #debug purpose
   end
 
   def create

@@ -8,7 +8,7 @@
         </button>
       </div>
            <div class="modal-body d-flex flex-column align-items-center">
-        <%= form_with model: @login, url: sessions_path, remote: true do |form| %>
+        <%= form_with model: @Suser, url: sessions_path, remote: true do |form| %>
           <% if flash[:error].present? %>
             <div class="alert alert-danger">
               <%= flash[:error] %>

@@ -11,6 +11,7 @@
         <div class="navbar-logo">
             <a class="navbar-brand" href="#"><strong>PesaFast</strong><br>Play Win Play</a>
         </div>
+        
         <%=current_user.username%>
         balance <%=current_user.balance%>
         bets <%= User.count_users_with_bets%>
@@ -20,11 +21,11 @@
             <a class="nav-link flex-grow-1" href="<%= deposits_new_path %>" data-turbo-frame="modal">Deposit</a>
             <a class="nav-link flex-grow-1" href="<%= withdraws_new_path %>">Withdraw</a>
              <%= button_to "Log out", logout_path, method: :delete, class: "nav-link flex-grow-1" %>
+
             <%end%>         
           
                    
-          </ul>
-        </li>
+         
         </div>
     </nav>
 </body>

@@ -95,6 +95,12 @@ def save_burst_data
   end
 end
 
+# app/controllers/bets_controller.rb
+def bet_history
+  @user = current_user
+  @bets = @user.bets # Assuming you have an association between users and their bets
+end
+
 
 
   private 
