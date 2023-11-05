@@ -36,3 +36,4 @@ class SessionsController < ApplicationController
     @online_users_count = User.where(logged_in: true).count
   end
 end
+

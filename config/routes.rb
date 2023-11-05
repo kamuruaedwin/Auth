@@ -14,6 +14,16 @@ post 'bets/save_burst_data'
 resources :bets
 post '/bets/save_burst_data', to: 'bets#save_burst_data'
 
+
+  # resources :bets do
+  #   collection do
+  #     get :get_latest_betid
+  #   end
+  # end
+  
+post '/bets/update_burst_value', to: 'bets#update_burst_value'
+
+
 get 'deposits/new'
 get 'deposits/create'
 resources :deposits, only: [:new, :create]
