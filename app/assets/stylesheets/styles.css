@@ -123,13 +123,21 @@ body {
             /*position: relative; /* Added relative positioning */
         }
 
-        /*Styling message input field* inside the chat container/
-        #message-container
-        {   width: 100%;
              
-            height:20px;
-    
-        }
+            .message {
+              margin-bottom: 10px;
+            }
+
+            .username {
+              font-weight: bold;
+              color: orange;
+            }
+
+            .timestamp {
+              color: orange;
+              font-size: 0.9em;
+            }
+
         /* Style the canvas for the graph */
         #chart-container {
             min-height: 350px;
