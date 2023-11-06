@@ -17,7 +17,7 @@ class MessagesController < ApplicationController
      flash[:alert] = 'Failed to post the message.'
     end
     @messages = Message.order(created_at: :desc) # Fetch messages
-    render :index # Render the index view
+    redirect_to root_path # Render the index view
   end
 
   private

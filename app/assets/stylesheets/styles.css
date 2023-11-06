@@ -109,6 +109,8 @@ body {
             padding: 8px;
             /*position: relative; /* Added relative positioning */
         }
+        /* Set a fixed height for the container */
+
 
         #chat-container {
             background-color: darkslategray;
@@ -116,7 +118,8 @@ body {
             float: right;  
             height: 350px;                                                       
             border: 1px solid #ccc;
-            padding: 8px;
+            padding: 8px;             
+            overflow-y: scroll; /* Add a vertical scrollbar when content overflows *
             /*position: relative; /* Added relative positioning */
         }
 
