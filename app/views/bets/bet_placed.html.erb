@@ -1,27 +1,33 @@
-<!-- app/views/bets/bet_history.html.erb -->
-<h5>Live Bets</h5>
-
-<table class="table table-striped table-hover">
-  <thead>
-    <tr>
-      <th>Player</th>
-      <th>Stake Amount</th>
-      <th>Predicted Y Value</th>
-      <th>Profit</th>
-      <!-- Add more table headers as needed -->
-    </tr>
-  </thead>
-  <tbody>
-    <% @bets.each do |bet| %>
-      <tr>
-        <td><%= current_user.username %></td>        
-        <td><%= bet.stake_amount %></td>
-        <td><%= bet.predicted_y_value %></td>
-        <td><%= bet.outcome %></td>
-
-        
-        <!-- Add more table cells for additional bet attributes -->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="card" style="width: 100%;">
+        <div class="card-header">
+            <p class="card-title">Your Bets</p>
+        </div>
+        <div class="card-body">
+            <div id="table-container">
+                <table>
+                     <thead>
+                        <tr>
+                          <th>Player</th>
+                          <th>Stake Amount</th>
+                          <th>Predicted Y Value</th>
+                          <th>Profit</th>
+                          <!-- Add more table headers as needed -->
+                        </tr>
+                      </thead>
+                    <tbody id="table-body">
+                        <!-- Table rows will be added dynamically here -->
+                       <% @bets.each do |bet| %>
+                          <tr>
+                            <td><%= current_user.username %></td>        
+                            <td><%= bet.stake_amount %></td>
+                            <td><%= bet.predicted_y_value %></td>
+                            <td><%= bet.outcome %></td>
+                            <!-- Add more table cells for additional bet attributes -->
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>

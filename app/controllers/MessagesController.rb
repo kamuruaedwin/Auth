@@ -3,11 +3,13 @@ class MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def index
+
     @messages = Message.order(created_at: :desc)
   end
 
   def create
-    @message = Message.new(message_params)
+    @user =current_user
+    @message = @user.messages.new(message_params)
     # @message = current_user.messages.build(message_params)
     if @message.save
       flash[:notice] = 'Message posted successfully.'

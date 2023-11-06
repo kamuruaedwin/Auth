@@ -1,23 +1,15 @@
-<div class="card" style="width: 100%;">
-        <div class="card-header">
-            <p class="card-title">Your Bets</p>
-        </div>
-        <div class="card-body">
-            <div id="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Game Id</th>
-                            <th>Stake</th>
-                            <th>Burst</th>
-                            <th>Profit</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body">
-                        <!-- Table rows will be added dynamically here -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    </div>
+<div id="bets-container">
+  <h5>Your Bets</h5>
+  <table  class="table table-bordered" id="bets-table">
+    <thead>
+      <tr>
+        <th scope="col">Bet ID</th>
+        <th scope="col">Amount</th>
+        <th scope="col">Outcome</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Table rows for bets will be added here dynamically -->
+    </tbody>
+  </table>
+</div>

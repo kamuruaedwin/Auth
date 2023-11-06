@@ -1,27 +1,37 @@
-<!-- app/views/bets/bet_history.html.erb -->
-<h1>Your Bet History</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th>Bet ID</th>
-      <th>Stake Amount</th>
-      <th>Predicted Y Value</th>
-      <th>burst_value</th>
-      <th>Results</th>
-      <!-- Add more table headers as needed -->
-    </tr>
-  </thead>
-  <tbody>
-    <% @bets.each do |bet| %>
-      <tr>
-        <td><%= bet.betid %></td>
-        <td><%= bet.stake_amount %></td>
-        <td><%= bet.predicted_y_value %></td>
-        <td><%= bet.burst_value %></td>
-        <td><%= bet.outcome%></td>
+<div class="card" style="width: 100%;">
+        <div class="card-header">
+            <p class="card-title">Your Bets</p>
+        </div>
+        <div class="card-body">
+            <div id="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                          <th>Bet ID</th>
+                          <th>Date</th>
+                          <th>Stake Amount</th>
+                          <th>Predicted Y Value</th>
+                          <th>burst_value</th>
+                          <th>Results</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <!-- Table rows will be added dynamically here -->
+                        <% @bets.each do |bet| %>
+                          <tr>
+                            <td><%= bet.betid %></td>
+                            <td><%= bet.created_at%></td>
+                            <td><%= bet.stake_amount %></td>
+                            <td><%= bet.predicted_y_value %></td>
+                            <td><%= bet.burst_value %></td>
+                            <td><%= bet.outcome%></td>
 
-        <!-- Add more table cells for other bet attributes -->
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+                            <!-- Add more table cells for other bet attributes -->
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>

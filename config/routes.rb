@@ -5,6 +5,9 @@ resources :registrations
 resources :password_resets
 resources :passwords
 
+resources :registrations, only: [:new, :create]
+
+
 delete 'logout' => 'sessions#destroy', as: :logout
 
 post '/data/receive_data', to: 'data#receive_data'
