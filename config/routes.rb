@@ -7,6 +7,11 @@ resources :passwords
 
 resources :registrations, only: [:new, :create]
 
+resources :users do
+  resources :messages
+end
+
+
 
 delete 'logout' => 'sessions#destroy', as: :logout
 
@@ -22,11 +27,6 @@ get '/bet_history', to: 'bets#bet_history' #for current_user all bets
 
 
 
-  # resources :bets do
-  #   collection do
-  #     get :get_latest_betid
-  #   end
-  # end
   
 post '/bets/update_burst_value', to: 'bets#update_burst_value'
 

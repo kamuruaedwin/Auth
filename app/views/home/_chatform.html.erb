@@ -4,14 +4,17 @@
                 <p class="card-title">Chats</p>
             </div>
             <div class="card-body">          
-    
+                 <% if user_signed_in? %>
+                    <%= render 'main/Message_form' %>
+                 <%end%>
                 <ul>
-                 
-                  
+                  <% @messages.each do |message| %>
+                    <li> <%=message.content %>
+                        
+                    </li>
+                  <% end %>
                 </ul>
-                <% if user_signed_in? %>
-                <%= render 'main/Message_form' %>
-                <%end%>
+               
 
             </div>
         </div>
