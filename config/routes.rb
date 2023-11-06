@@ -12,9 +12,10 @@ post 'bets/save_burst_data'
 
 # get 'bets/new'
 resources :bets
-post '/bets/save_burst_data', to: 'bets#save_burst_data'
 
-get '/bet_history', to: 'bets#bet_history'
+get 'bet_placed', to: 'bets#bet_placed' # for all users bets settled=false
+post '/bets/save_burst_data', to: 'bets#save_burst_data'
+get '/bet_history', to: 'bets#bet_history' #for current_user all bets
 
 
 

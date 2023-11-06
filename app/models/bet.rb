@@ -2,6 +2,7 @@
 class Bet < ApplicationRecord
   
   belongs_to :user
+  
 
   # Validation rules for the Bet model
   validates :stake_amount, presence: true
@@ -17,4 +18,6 @@ class Bet < ApplicationRecord
       errors.add(:stake_amount, "cannot be greater than your balance")
     end
   end
+
+
 end

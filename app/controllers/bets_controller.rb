@@ -21,6 +21,7 @@ def create
   @bet.betid = SecureRandom.hex(6)
   @bet.burst_value = 0
   @bet.total_outcome = 0
+  @bet.settled = false
 
   if @bet.save
     session[:bet_id] = @bet.betid
@@ -39,6 +40,10 @@ def create
   end
 end
 
+def bet_placed
+  @user = User.find(current_user.id)
+  @bets = Bet.where(settled: false)
+end
 
 
 # Working burst_data_save
@@ -64,7 +69,7 @@ def save_burst_data
     else
       bets.each do |bet|
         # Update each bet's burst_value
-        bet.update(burst_value: burst_value, hashvalue: hashvalue)
+        bet.update(burst_value: burst_value, hashvalue: hashvalue, settled: true)
 
         # Calculate the bet outcome based on the updated burst_value
         if bet.predicted_y_value.present? && bet.stake_amount.present?
@@ -94,6 +99,8 @@ def save_burst_data
     render json: { status: 'Error', message: 'Internal Server Error' }, status: :internal_server_error
   end
 end
+
+
 
 # app/controllers/bets_controller.rb
 def bet_history
