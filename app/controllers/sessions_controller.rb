@@ -20,14 +20,16 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    if user_signed_in?
-      current_user.update(logged_in: false)
-      reset_session
-      redirect_to root_path, notice: "You have been logged out successfully."
-    else
-      redirect_to root_path, notice: "Failed to log out."
+  if user_signed_in?
+    current_user.update(logged_in: false)
+    reset_session
+    respond_to do |format|
+      # format.html { redirect_to root_path }
+      format.js { render js: "window.location.href = '/';" }
     end
   end
+end
+
 
   private
 

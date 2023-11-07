@@ -11,7 +11,7 @@
     <%= stylesheet_link_tag 'styles' %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag 'application' %>
-    <%= javascript_include_tag 'chart' %>
+   
 
     
 
@@ -74,7 +74,8 @@
 <%= render 'registrations/signup'%>
 <%= render 'sessions/modal'%>
 <%= render 'deposits/modal'%>
-
+<%= javascript_include_tag 'chart' %>
+<%= javascript_include_tag 'logout' %>
 
 
 

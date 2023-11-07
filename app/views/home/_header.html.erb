@@ -8,6 +8,8 @@
       <ul class="navbar-nav ml-auto"> <!-- Use ml-auto to push items to the right -->
 
         <% if user_signed_in? %>
+        <li><button id="logout-button">Logout</button>
+        </li>
         <li class="nav-item">
         <%= link_to 'Bet History', bet_history_path, class: 'nav-link' %>
         </li>
@@ -37,9 +39,7 @@
           <ul class="dropdown-menu">
             <li><%= link_to 'Withdraw', withdraws_new_path, class: 'dropdown-item' %></li>
             <li><hr class="dropdown-divider"></li>
-            <li>
-              <%= button_to 'Log out', logout_path, method: :delete, class: 'dropdown-item' %>
-            </li>
+            
           </ul>
         </li>
         <% end %>
@@ -47,3 +47,25 @@
     </div>
   </div>
 </nav>
+<script>
+  $(document).ready(function() {
+    $('#logout-button').on('click', function() {
+      $.ajax({
+        type: 'DELETE', // Use the appropriate HTTP method (typically DELETE for logout)
+        url: '<%= logout_path %>',// Replace with the URL of your logout action
+          headers: {
+        'X-CSRF-Token': $('meta[name="csrf-token"]').attr('content')
+      },
+        success: function(data) {
+          // Handle the success response, e.g., redirect or show a message
+          window.location.href = '/'; // Redirect to the home page
+        },
+        error: function(error) {
+          // Handle errors, e.g., show an error message
+          console.error('Logout failed:', error);
+        }
+      });
+    });
+  });
+</script>
+

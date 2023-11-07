@@ -11,9 +11,7 @@ resources :users do
   resources :messages
 end
 
-
-
-delete 'logout' => 'sessions#destroy', as: :logout
+delete 'logout', to: 'sessions#destroy', as: :logout
 
 post '/data/receive_data', to: 'data#receive_data'
 post 'bets/save_burst_data'

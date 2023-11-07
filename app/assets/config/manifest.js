@@ -4,5 +4,6 @@
 //= link styles.css
 //= link chart.js
 //= link bets.js
+//= link logout.js
 //= link_directory ../stylesheets
 

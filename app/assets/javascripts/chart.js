@@ -8,7 +8,7 @@
       const betid = container.getAttribute('data-betid');
 
       let animationIsRunning = true; // Initially, the animation is running
-      let randomStopTime = Math.random() * 15000; // Random stopping point (approximately 30 seconds);
+      let randomStopTime = Math.random() * 280000; // Random stopping point (approximately 30 seconds);
       let clearAnimationTimeout;
       
       const maxLastValues = 8; // Maximum number of last values to display
@@ -117,7 +117,7 @@
           timerDisplay.textContent = countdown;
           if (countdown === 0) {
             clearInterval(countdownInterval);
-            randomStopTime = Math.random() * 15000;
+            randomStopTime = Math.random() * 280000;
             startAnimation();
             timerDisplay.textContent = '';
           }

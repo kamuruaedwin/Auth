@@ -18,7 +18,9 @@
             <%= form.number_field :predicted_y_value, class: 'form-control', id: 'predicted_y_value', placeholder: 'Enter your prediction' %>
           </div>
           <div class="actions">
-            <%= form.submit 'Place Bet', id: 'placeBetButton', class:"touch-button" %>
+            <div id="placeBetButton" >
+              <%= form.submit 'Place Bet', class:"touch-button" %>
+            </div>
           </div>
         <% end %>
       </div>
