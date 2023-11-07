@@ -14,12 +14,10 @@
                     </div>
                   <% end %>
                 </div>
-
-
                  <% if user_signed_in? %>
                     <%= form_with model: @message, url: messages_path, method: :post, local: true do |form| %>
                               <%= form.text_area :content, placeholder: "Write your message here", rows: 3, required: true %>
-                              <%= form.submit "Post Message", class: "btn btn-primary" %>
+                              <%= form.submit "Post Message", class:"touch-button" %>
                             <% end %>
 
                             <% if @message.errors.any? %>
@@ -32,15 +30,7 @@
                                 </ul>
                               </div>
                             <% end %>
-
                  <%end%>
-                
-                
-
-   
-  
-               
-
             </div>
         </div>
     </div>

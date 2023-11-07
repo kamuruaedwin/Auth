@@ -18,7 +18,7 @@
             <%= form.number_field :predicted_y_value, class: 'form-control', id: 'predicted_y_value', placeholder: 'Enter your prediction' %>
           </div>
           <div class="actions">
-            <%= form.submit 'Place Bet', id: 'placeBetButton', class: 'btn btn-primary' %>
+            <%= form.submit 'Place Bet', id: 'placeBetButton', class:"touch-button" %>
           </div>
         <% end %>
       </div>
@@ -31,12 +31,12 @@
         <p class="card-title">Register/Login To Play</p>
       </div>
       <div class="card-body">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#signupModal">
+        <button type="button" class="touch-button" data-toggle="modal" data-target="#signupModal">
           Register
         </button>
         <br>
         <br>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">
+        <button type="button" class="touch-button" data-toggle="modal" data-target="#loginModal">
           Log In
         </button>
         
