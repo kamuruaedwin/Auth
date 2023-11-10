@@ -9,9 +9,15 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag 'styles' %>
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload"%>
     <%= javascript_include_tag 'application' %>
    
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+
+
+
 
     
 
@@ -74,7 +80,6 @@
 <%= render 'registrations/signup'%>
 <%= render 'sessions/modal'%>
 <%= render 'deposits/modal'%>
-<%= javascript_include_tag 'chart' %>
 <%= javascript_include_tag 'logout' %>
 
 

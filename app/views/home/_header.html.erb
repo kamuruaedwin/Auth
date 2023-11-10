@@ -9,13 +9,7 @@
 
         <% if user_signed_in? %>
         <li><button id="logout-button">Logout</button>
-        </li>
-        <li class="nav-item">
-        <%= link_to 'Bet History', bet_history_path, class: 'nav-link' %>
-        </li>
-          <li>
-            <%= link_to 'Live Bets', bet_placed_path %>
-          </li>         
+        </li>     
 
         <li class="nav-item">
           <%= current_user.username %>
@@ -47,8 +41,10 @@
     </div>
   </div>
 </nav>
+
+ 
 <script>
-  $(document).ready(function() {
+ $(document).ready(function() {
     $('#logout-button').on('click', function() {
       $.ajax({
         type: 'DELETE', // Use the appropriate HTTP method (typically DELETE for logout)
@@ -68,4 +64,23 @@
     });
   });
 </script>
+<script type="text/javascript">
+  // Add a click event listener to the "Messages" link
+  $('#messages-link').on('click', function (e) {
+    e.preventDefault(); // Prevent the default link behavior
 
+    // Make an AJAX request to fetch the "messages" view
+    $.ajax({
+      url: '/messages', // The URL to your controller action that renders the messages partial
+      type: 'GET',
+      success: function (data) {
+        // Replace the content of the container element with the fetched data (the messages view)
+        $('#chat-container').html(data);
+      },
+      error: function (error) {
+        // Handle errors if needed
+        console.error('Error:', error);
+      }
+    });
+  });
+</script>

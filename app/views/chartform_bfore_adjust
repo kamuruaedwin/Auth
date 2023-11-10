@@ -1,0 +1,123 @@
+<div id="chat-container">
+<%=render '/home/card_header'%>
+<div class="chat-container" >
+  <div class="card" >
+    <div id="messages-container">
+    <div class="card-body" id="content" >
+                  <!-- Loop through and display your messages here -->
+                  <% @messages.each do |message| %>
+                    <div class="message">
+                      <span class="username">@<%= message.user.username %>:</span>
+                      <span class="content"><%= message.content %></span>
+                      <span class="timestamp"><%= message.created_at.strftime('%I:%M %p') %></span>
+                    </div>
+                  <% end %>
+                </div>
+                </div>
+
+               <% if user_signed_in? %>
+                    <%= form_with model: @message, url: messages_path, method: :post, remote: true do |form| %>
+                    <div id="chatfooter-container">
+                      <div class="form-group row">
+                                   <div class="col-sm-9" style="height: 100%;">
+                                  <%= form.text_area :content, placeholder: "Write your message here", rows: 1, required: true, class: "form-control" %>
+                                </div><div class="col-sm-3">
+                                  <%= form.submit "Post", class: "btn btn-primary touch-button" %>
+                                </div>
+                              </div>
+                        </div>
+
+                      <% end %>
+                      <%else%>
+                      <div id="chatfooter-container">
+                        <p>Login to post</p>
+                      </div>
+                      
+
+                            <% if @message.errors.any? %>
+                              <div>
+                                <h2><%= pluralize(@message.errors.count, "error") %> prohibited this message from being saved:</h2>
+                                <ul>
+                                  <% @message.errors.full_messages.each do |message| %>
+                                    <li><%= message %></li>
+                                  <% end %>
+                                </ul>
+                              </div>
+                            <% end %>
+                 <%end%>
+    
+
+
+      </div>   
+    </div>            
+  </div>
+ </div>
+
+
+<script src="<%= asset_path 'messages.js' %>"></script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Card with Dynamic Content</title>
+  <!-- Include jQuery -->
+  
+  <style>
+    /* Add your styles for the card here */
+    .card {
+      border: 1px solid #ccc;
+      padding: 10px;
+      margin: 10px;
+    }
+
+    /* Add your styles for the buttons here */
+    .card-buttons {
+      display: flex;
+    }
+
+    .card-button {
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+  <div class="card-buttons">
+    <div class="card-button" onclick="changeContent('button1')">Button 1</div>
+    <div class="card-button" onclick="changeContent('button2')">Button 2</div>
+    <div class="card-button" onclick="changeContent('button3')">Button 3</div>
+  </div>
+  <div class="card-body" id="cardBody">
+    <!-- Default content -->
+    Initial content goes here.
+  </div>
+</div>
+
+<script>
+  function changeContent(buttonId) {
+    // You can use Ajax to fetch content dynamically based on the button clicked
+    // For simplicity, I'll just update the content based on the button clicked
+    var newContent;
+
+    if (buttonId === 'button1') {
+      newContent = 'Content for Button 1';
+    } else if (buttonId === 'button2') {
+      newContent = 'Content for Button 2';
+    } else if (buttonId === 'button3') {
+      newContent = 'Content for Button 3';
+    }
+
+    // Update the card body content
+    $('#cardBody').html(newContent);
+  }
+  // Set the default content to be the content of Button 1
+  changeContent('button1');
+</script>
+
+</body>
+</html>

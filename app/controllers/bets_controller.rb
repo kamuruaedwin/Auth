@@ -40,9 +40,10 @@ def create
   end
 end
 
-def bet_placed
+def live_bets
   @user = User.find(current_user.id)
   @bets = Bet.where(settled: false)
+  render 'live_bets', layout: false
 end
 
 

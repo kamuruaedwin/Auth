@@ -1,24 +1,77 @@
-<div id="chat-container">
-        <div class="card" style="width: 100%">
-            <div class="card-header">
-                <p class="card-title">Chats</p>
+<head>
+  <style>
+    /* Add your styles for the card here */
+    .card {
+      border: 1px solid #ccc;
+      padding: 8px;
+      margin: 8px;
+    }
+
+    /* Add your styles for the buttons here */
+    .card-buttons {
+      display: flex;
+    }
+
+    .card-button {
+      margin-right: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+        <div class="card">
+              
+            <div id="card-header">
+                <div class="card-buttons">
+                  <div class="card-button" onclick="changeContent('button1')">Bets</div>
+                  <div class="card-button" onclick="changeContent('button2')">Chats</div>
+                  <div class="card-button" onclick="changeContent('button3')">Button 3</div>
+                </div>
             </div>
-            <div class="card-body"> 
-                <div class="chat-container">
-                  <!-- Loop through and display your messages here -->
+
+
+              <div class="card-body" id="cardBody">
+                <!-- Default content -->
+                Initial content goes here.
+                
+              </div> 
+            
+        </div>
+
+<!-- Your original HTML for the messages and form -->
+<div class="card" style="width: 100%;">
+  <div class="card-body" >
+    <div id="messages-container">
+    
+                  <!-- Loop throughr and display your messages here -->
                   <% @messages.each do |message| %>
                     <div class="message">
-                      <span class="username"><%= message.user.username %>:</span>
+                      <span class="username">@<%= message.user.username %>:</span>
                       <span class="content"><%= message.content %></span>
                       <span class="timestamp"><%= message.created_at.strftime('%I:%M %p') %></span>
                     </div>
                   <% end %>
-                </div>
-                 <% if user_signed_in? %>
-                    <%= form_with model: @message, url: messages_path, method: :post, local: true do |form| %>
-                              <%= form.text_area :content, placeholder: "Write your message here", rows: 3, required: true %>
-                              <%= form.submit "Post Message", class:"touch-button" %>
-                            <% end %>
+              
+
+               <% if user_signed_in? %>
+                    <%= form_with model: @message, url: messages_path, method: :post, remote: true do |form| %>
+                    <div id="chatfooter-container">
+                      <div class="form-group row">
+                                   <div class="col-sm-9" style="height: 100%;">
+                                  <%= form.text_area :content, placeholder: "Write your message here", rows: 1, required: true, class: "form-control" %>
+                                </div><div class="col-sm-3">
+                                  <%= form.submit "Post", class: "btn btn-primary touch-button" %>
+                                </div>
+                              </div>
+                        </div>
+
+                      <% end %>
+                      <%else%>
+                      <div id="chatfooter-container">
+                        <p>Login to post</p>
+                      </div>
+                      
 
                             <% if @message.errors.any? %>
                               <div>
@@ -31,7 +84,75 @@
                               </div>
                             <% end %>
                  <%end%>
+    
+ </div>  
+
+      </div>   
+    </div>                       
+<div class="chat-container" >
+  <div class="card" >
+<!-- Your original HTML for the table -->
+    <div class="card" style="width: 100%;">
+        <div class="card-body">
+            <div id="bettable-container">
+                <table>
+                     <thead>
+                        <tr>
+                          <th>Player</th>
+                          <th>Amount</th>
+                          <th>Predicted</th>
+                          <th>Profit</th>
+                          <!-- Add more table headers as needed -->
+                        </tr>
+                      </thead>
+                    <tbody id="bettable-body">
+                        <!-- Table rows will be added dynamically here -->
+                       <% @bets.each do |bet| %>
+                          <tr>
+                            <td><%= bet.user.username %></td>        
+                            <td><%= bet.stake_amount %></td>
+                            <td><%= bet.predicted_y_value %></td>
+                            <td><%= bet.outcome %></td>
+                            <!-- Add more table cells for additional bet attributes -->
+                          </tr>
+                        <% end %>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
-    </div>
+</div>
+</div> 
+<!-- ... (previous HTML code) ... -->
+
+<script type="text/javascript">
+  function changeContent(buttonId) {
+    // Clear existing content in #cardBody
+    $('#cardBody').empty();
+
+    // Check which button is clicked
+    if (buttonId === 'button1') {
+      // Load the content of the table into the card body
+      var tableContent = $('#bettable-container').html();
+      $('#cardBody').html(tableContent);
+    } else if (buttonId === 'button2') {
+      // Update the card body with content for Button 2
+      var messagesContent = $('#messages-container').html();
+      $('#cardBody').html(messagesContent);
+    }
+  }
+
+  // Set the default content to be the content of Button 1
+  $(document).ready(function () {
+    changeContent('button1');
+  });
+</script>
+
+<script src="<%= asset_path 'messages.js' %>"></script>
+
+</body>
+</html>
+
+
+<script src="<%= asset_path 'messages.js' %>"></script>
+
+</body>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2023_11_07_161647) do
+ActiveRecord::Schema[7.1].define(version: 2023_11_07_165536) do
   create_table "animation_data", force: :cascade do |t|
     t.string "hashvalue"
     t.float "burst_value"
@@ -24,6 +24,8 @@ ActiveRecord::Schema[7.1].define(version: 2023_11_07_161647) do
     t.string "status", default: "running"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "hashvalue"
+    t.string "animation_id"
     t.index ["user_id"], name: "index_animations_on_user_id"
   end
 

@@ -1,0 +1,4 @@
+# app/views/messages/create.js.erb
+
+$('#messages-container').append("<div class='message'><span class='username'><%= @message.user.username %>:</span><span class='content'><%= @message.content %></span><span class='timestamp'><%= @message.created_at.strftime('%I:%M %p') %></span></div>");
+$('#message-form textarea').val('');

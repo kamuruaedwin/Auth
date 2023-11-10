@@ -1,25 +1,12 @@
-<%= flash[:success] %>
-<%= flash[:error] %>
-<body>
-  <div id="container">
-    <%= render 'tables/chart'%>
-    <%= render 'home/betform'%>
-    <%= render 'home/chatform'%>
-    <%= render 'tables/burst_table'%>
-    <%= render 'tables/your_bets'%>
-  </div>
-
-  <script>
-
       document.addEventListener("DOMContentLoaded", () => {
       const canvas = document.getElementById('chart-container');
       const context = canvas.getContext('2d');
-      const animationDuration = 15000; // Animation duration in milliseconds
+      const animationDuration = 28000; // Animation duration in milliseconds
       let animationStartTime;
       let burst_value;
-      // Retrieve the bet_id from the DOM element
-      const betidElement = document.getElementById('betid');
-      const betid = betidElement.textContent;
+      const container = document.getElementById('container');
+      const betid = container.getAttribute('data-betid');
+
       let animationIsRunning = true; // Initially, the animation is running
       let randomStopTime = Math.random() * 15000; // Random stopping point (approximately 30 seconds);
       let clearAnimationTimeout;
@@ -48,7 +35,7 @@
               type: 'linear',
               position: 'bottom',
               title: {
-                display: true,
+                display: false,
                 text: 'Time',
               },
             },
@@ -56,7 +43,7 @@
               type: 'linear',
               position: 'left',
               title: {
-                display: true,
+                display: false,
                 text: 'Value',
               },
               beginAtZero: false, // Do not start y-axis from zero
@@ -107,7 +94,8 @@
         animationIsRunning = false;
         burst_value = value;
         hashvalue = generateHashvalue();
-        lastYValues.push({ hashvalue, value });
+        // Update the burst_value in the DOM
+             lastYValues.push({ hashvalue, value });
         if (lastYValues.length > maxLastValues) {
           const removedValue = lastYValues.shift();
           delete hashvalueToValueMap[removedValue.hashvalue];
@@ -117,7 +105,11 @@
         hashvalueToValueMap[hashvalue] = value;
         displayLastValues();
         updateTable();
-
+         // Disable the "Place Bet" button
+        const placeBetButton = document.getElementById('placeBetButton');
+        if (placeBetButton) {
+          placeBetButton.disabled = false;
+        }
         let countdown = 5;
         timerDisplay.textContent = countdown;
         const countdownInterval = setInterval(() => {
@@ -134,14 +126,15 @@
         clearAnimationTimeout = setTimeout(() => {
           clearAnimation();
         }, 3000);
-
+        
+         
        $.ajax({
                 type: 'POST',
                 url: 'http://localhost:3000/bets/save_burst_data', // Update the URL as needed durin
                 data: {
                     'burst_data[burst_value]': burst_value,
                     'burst_data[hashvalue]': hashvalue,
-                    'burst_data[betid]': betid,
+                    
                     
                 },
                 beforeSend: function(xhr) {
@@ -150,13 +143,14 @@
                 success: function(response) {
                     // Handle the success response from the server, if needed
                 },
-                error: function(error) {
-                    // Handle any errors, if needed
+                error: function(error){
+                  //managing error
                 }
             });
 
         
       }
+
 
       function clearAnimation() {
         context.clearRect(0, 0, canvas.width, canvas.height);
@@ -193,26 +187,20 @@
         }
       }
 
+
+
       function startAnimation() {
         animationStartTime = null;
         animationIsRunning = true;
-      var betid = document.getElementById('betid').value;
+         // Enable the "Place Bet" button
+      const placeBetButton = document.getElementById('placeBetButton');
+      if (placeBetButton) {
+        placeBetButton.disabled = true;
+      }
         drawGraph();
         
       }
       startAnimation();
      
     });
-    
-  </script>
-  <!-- Include Bootstrap JS (optional) -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-  <div class="container-fluid">
-      <div id="container">
-        <footer>
-          <p> 
-          <a href="#">PesaFast BCLB no 88888 Copyright © 2023 All Rights Reserved</a></p>
-        </footer>
-      </div>
-    </div>
-</body>
+

@@ -1,0 +1,29 @@
+<!-- app/views/line_graph/data.html.erb -->
+
+<h1>Dynamic Line Graph</h1>
+
+<!-- app/views/line_graph/data.html.erb -->
+
+<h1>Dynamic Line Graph</h1>
+
+<%= line_chart '/line_graph/data' %>
+
+
+<script>
+  var graph = null;
+
+  function stopGraph(animation) {
+    if (animation.numSteps >= 20) {
+      // Stop the graph animation after 20 steps (you can adjust this number)
+      graph.config.options.animation = false;
+      graph.update();
+    }
+  }
+
+  document.addEventListener("turbolinks:load", function() {
+    var chart = Chartkick.charts[0];
+    if (chart) {
+      graph = chart.getChart();
+    }
+  });
+</script>

@@ -89,10 +89,11 @@ body {
         
 
         /*Styling Animation-Container*/
+/*      consider chart-container too when modifying this  */
         #animation-container {
             background-color: darkslategray;
-            width: 53%;
-            min-height: 350px; 
+            width: 35rem;
+            min-height: 300px; 
             float: left;
             border: 1px solid #ccc;
             padding: 0px;
@@ -102,28 +103,67 @@ body {
        
         #bet-container {
             background-color: darkslategray;
-            width: 17%; 
+            width: 10 rem; 
             height: 350px; 
             float: left;                                                         
-            border: 1px solid #ccc;
+/*            border: 1px solid #ccc;*/
             padding: 8px;
+            display: flex;
             /*position: relative; /* Added relative positioning */
         }
-     
-
 
         #chat-container {
             background-color: darkslategray;
-            width: 30%;  
+            width: 27rem;
             float: right;  
-            height: 350px;                                                       
-            border: 1px solid #ccc;
+            height: 380px;                                                       
+/*            border: 0px solid #ccc;*/
+            display: flex;
+            flex-direction: column;
             padding: 8px;             
-            overflow-y: scroll; /* Add a vertical scrollbar when content overflows *
+             /* Add a vertical scrollbar when content overflows *
             /*position: relative; /* Added relative positioning */
         }
-
-             
+          #live_bets-container {
+          background-color: orange;
+          width: 100%;
+          height: 300px;
+          border: 1px solid #ccc;
+          padding: 0px;
+          display: flex; /* Use flex layout */
+          justify-content: space-between; /* Horizontally distribute contents with space between them */
+          align-items: center; /* Vertically center contents within the container */
+          position: relative;
+          
+        }
+        #card_header-container {
+          width: 100%;
+          height: 50px;
+          padding: 0px;         
+        }
+        #messages-container {
+          width: 100%;
+          height: 300px;
+          padding: 0px;
+          overflow-y: scroll;
+          display: flex; /* Use flex layout */
+          align-content: left; /* Vertically center contents within the container */
+          position: relative;
+          
+        }
+        #chatfooter-container {
+          width: 100%;
+          height: 40px;
+          border: 1px solid #ccc;
+          padding: 0px;
+          display: flex; /* Use flex layout */
+          justify-content: space-between; /* Horizontally distribute contents with space between them */
+          align-items: center; /* Vertically center contents within the container */
+          position: relative;
+          bottom: 0;
+        }
+            
+          
             .message {
               margin-bottom: 10px;
             }
@@ -140,7 +180,7 @@ body {
 
         /* Style the canvas for the graph */
         #chart-container {
-            min-height: 350px;
+            min-height: 35rem;
             padding: 8px;
             background-color: darkslategray;
             width: 100%; /* Set canvas width to 100% to make it responsive */
@@ -183,6 +223,7 @@ body {
           background-color: orange;
           padding: 0px;
           height:23px;
+          top: 0;
           color: darkslategray; /* Set the text color to white for better visibility */
         }
 
@@ -208,6 +249,28 @@ body {
         }
 
         table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 10px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: darkslategray;
+        }
+
+        /* Style the table container, has the table content */
+        #bettable-container {
+            margin-top: 10px; /* Adjust the margin-top as needed */
+            text-align: left;
+        }
+
+        bettable {
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 10px;

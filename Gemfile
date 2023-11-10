@@ -32,7 +32,8 @@ gem 'activesupport', '7.1.0'
 gem 'jquery-rails'
 gem 'uglifier'
 gem 'turbolinks'
-
+gem 'chartkick'
+gem 'chartjs-ror'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"

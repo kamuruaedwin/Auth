@@ -1,15 +1,16 @@
-<div class="card" style="width: 100%;">
-        <div class="card-header">
-            <p class="card-title">Your Bets</p>
-        </div>
+<div id="chat-container">
+    <%=render '/home/card_header'%>
+    <div class="card" style="width: 100%;">
+        
         <div class="card-body">
+            
             <div id="table-container">
                 <table>
                      <thead>
                         <tr>
                           <th>Player</th>
-                          <th>Stake Amount</th>
-                          <th>Predicted Y Value</th>
+                          <th>Amount</th>
+                          <th>Predicted</th>
                           <th>Profit</th>
                           <!-- Add more table headers as needed -->
                         </tr>
@@ -30,4 +31,4 @@
             </div>
         </div>
     </div>
-    </div>
+</div>

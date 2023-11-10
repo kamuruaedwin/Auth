@@ -1,7 +1,7 @@
 class MainController < ApplicationController
 	def index
 		@user = User.new # Initialize a new User instance
-		
+		@bets = Bet.where(settled: false)
 		@messages = Message.order(created_at: :desc)
 		@messages = Message.all # Or fetch messages from your database
 		@message = Message.new #initializing an empty message object for the form
